@@ -13,7 +13,7 @@ router.get('/', async (req, res) => {
   }
 });
 
-// GET a single product
+// GET a single category
 router.get('/:id', async (req, res) => {
 
   try {
