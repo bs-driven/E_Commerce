@@ -14,7 +14,7 @@ router.get('/', async (req, res) => {
 });
 
 // GET a single category
-router.get('/:id', async (req, res) => {
+router.get('/:category_id', async (req, res) => {
 
   try {
     const categoryData = await Category.findByPk(req.params.id, {
@@ -22,7 +22,7 @@ router.get('/:id', async (req, res) => {
     });
 
     if (!categoryData) {
-      res.status(404).json({ message: 'No product found with that id!' });
+      res.status(404).json({ message: 'No category found with that id!' });
       return;
     }
 
@@ -36,7 +36,7 @@ router.get('/:id', async (req, res) => {
 router.post('/', async (req, res) => {
   try {
     const categoryData = await Category.create({
-      category_id: req.body.category_id,
+      category_id: req.body,
     });
     res.status(200).json(categoryData);
   } catch (err) {
@@ -45,11 +45,11 @@ router.post('/', async (req, res) => {
 });
 
 // update a category by its `id` value
-router.put('/:id', async (req, res) => {
+router.put('/:category_id', async (req, res) => {
   try {
     const categoryData = await Category.update(req.body, {
       where: {
-        id: req.params.id,
+        id: req.params.category_id,
       },
       individualHooks: true
     });
@@ -64,7 +64,7 @@ router.put('/:id', async (req, res) => {
 });
 
 // delete a category by its `id` value
-router.delete('/:id', async (req, res) => {
+router.delete('/:category_id', async (req, res) => {
   try {
     const categoryData = await Category.destroy({
       where: {
