@@ -49,7 +49,7 @@ router.put('/:id', async (req, res) => {
   // update a tag's name by its `id` value
   try {
     const updateTag = await Tag.update(req.body, {
-      where: {id: req.params.id}
+      where: {tag_id: req.params.id}
     });
     if (!updateTag) {
       res.status(404).json({message: 'A tag with these id does not exist!'})
@@ -64,7 +64,7 @@ router.delete('/:id', (req, res) => {
   // delete on tag by its `id` value
   Tag.destroy({
     where: {
-      tag_id: req.params,
+      tag_id: req.params.id,
     },
   })
     .then((deletedTag) => {
